@@ -1,0 +1,124 @@
+/*  去掉标签默认的间距   */
+body, ul, ol, p, h1, h2, h3, h4, h4, h6, dl, dd, select, input, form {
+    margin: 0;
+    padding: 0;
+}
+
+/*  去掉小圆点以及数字   */
+ul, ol {
+    list-style: none;
+}
+
+/* 去掉下划线 */
+a {
+    text-decoration: none;
+}
+
+/* 去掉斜体 */
+em {
+    font-style: normal;
+}
+
+/* 让h标签继承body的文字设置 */
+h1, h2, h3, h4, h4, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+/* 在IE下去掉图片做链接时生成的框线 */
+img {
+    border: 0px;
+}
+
+/* 清除浮动以及清除margin-top塌陷 */
+.clearfix:before, .clearfix:after {
+    content: '';
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+
+/*.next-cart-wrapper {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    box-sizing: border-box*/
+/*}*/
+
+/*.next-cart-wrapper .header {*/
+/*    color: #262626;*/
+/*    letter-spacing: 0;*/
+/*    text-align: justify*/
+/*}*/
+
+/*.next-cart-wrapper .header:after {*/
+/*    display: block;*/
+/*    width: 20px;*/
+/*    height: 0;*/
+/*    content: "";*/
+/*    border: .5px solid #ddd;*/
+/*    margin-top: 10px*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title {*/
+/*    cursor: pointer*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title .section-title-a {*/
+/*    color: #262626*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title .section-title-a:hover {*/
+/*    color: #4d7fd0*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-item {*/
+/*    padding-top: 8px*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-brief {*/
+/*    font-size: 13px;*/
+/*    color: #787878;*/
+/*    letter-spacing: 0;*/
+/*    text-align: justify;*/
+/*    line-height: 20px*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-publice-at {*/
+/*    font-size: 12px;*/
+/*    color: #a7a7a7;*/
+/*    letter-spacing: 0;*/
+/*    text-align: justify*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title {*/
+/*    cursor: pointer*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title .section-title-a {*/
+/*    color: #262626*/
+/*}*/
+
+/*.next-cart-wrapper .section .section-title .section-title-a:hover {*/
+/*    color: #4d7fd0*/
+/*}*/
+
+
+
+
+

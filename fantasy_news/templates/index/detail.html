@@ -1,0 +1,144 @@
+{% extends 'index/index_base.html' %}
+
+{% block Title %}
+    {{ news.new_title }}
+{% endblock %}
+
+{% block js %}
+    <link rel="stylesheet" type="text/css" href="/static/index/css/read.css">
+    <script type="text/javascript" src="/static/index/js/detail.js"></script>
+    <style type="text/css">
+        .hr a {
+            font-size: 15px;
+            color: #262626;
+        }
+
+        .hr a:hover {
+            color: #39f;
+        }
+    </style>
+{% endblock js %}
+
+{% block content %}
+    <div class="detail_con fl">
+        <h3>{{ news.new_title }}</h3>
+        <div class="detail_about clearfix">
+            <span class="time_souce fl">{{ news.new_time }} 来源: {{ news.new_source }}</span>
+            {#            <span class="comment fr">3</span>#}
+        </div>
+
+        <p class="summary">
+            摘要：{{ news.digest }}
+        </p>
+
+        {{ news.new_content | safe }}
+
+        {% if can_collect %}
+            <a href="javascript:;" class="collection block-center" data-news-id="{{ news.id }}">收藏</a>
+        {% else %}
+            <a href="javascript:;" class="collected block-center" data-news-id="{{ news.id }}"><span
+                    class="out">已收藏</span><span class="over">取消收藏</span></a>
+        {% endif %}
+
+        {% if not username %}
+            <div class="comment_form_logout">
+                登录发表你的评论
+            </div>
+        {% else %}
+            <form action="" class="comment_form" data-news-id="{{ news.id }}">
+                <div class="person_pic">
+                    {#                <img src="/static/index/images/cat.jpg" alt="用户图标">#}
+                </div>
+                <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
+                <input type="submit" name="" value="评 论" class="comment_sub">
+            </form>
+        {% endif %}
+
+        <div class="comment_list_con">
+            {% for news in comment %}
+                <div class="comment_list">
+                    <div class="person_pic fl">
+                        <img src="/static/index/images/person01.png" alt="用户图标">
+                    </div>
+                    <div class="user_name fl">{{ news.user_info.username }}</div>
+                    <div class="comment_text fl">
+                        {{ news.content }}
+                    </div>
+                    {#                <div class="reply_text_con fl">#}
+                    {#                    <div class="user_name2">用户李思</div>#}
+                    {#                    <div class="reply_text">#}
+                    {#                        遏制茅台酒价格过快上涨，多渠道供给，就不一定要买，租茅台酒也可以的，租售同权。开发共有产权茅台酒，让老百姓喝得起茅台酒，饮者有其酒。#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                    <div class="comment_time fl">{{ news.now_time }}</div>
+                    {#                <a href="javascript:;" class="comment_up has_comment_up fr">1</a>#}
+                    {#                <a href="javascript:;" class="comment_reply fr">回复</a>#}
+                    {#                <from class="reply_form fl">#}
+                    {#                    <textarea class="reply_input"></textarea>#}
+                    {#                    <input type="submit" name="" value="回复" class="reply_sub fr">#}
+                    {#                    <input type="reset" name="" value="取消" class="reply_cancel fr">#}
+                    {#                </from>#}
+                </div>
+            {% endfor %}
+        </div>
+                <!--推荐阅读-->
+        <div class="read">
+            <div class="wire"></div>
+            <h2>相关推荐</h2>
+{#            <hr>#}
+            <ul class="text_list">
+                {% for res in result %}
+                <li>
+                    <a class="image_func" href="#"><img src="{{ res.index_image_url }}" alt=""></a>
+                    <p><a href="/detail/{{ res.id }}">{{ res.new_title[:35] }}</a></p>
+                    <p>{{ res.new_time }}</p>
+                </li>
+                {% endfor %}
+{#                <li>#}
+{#                    <a class="image_func" href="#"><img src="images/01.jpg" alt=""></a>#}
+{#                    <p><a href="#">美国一男子开6枪致妻子死亡 律师辩称：他当时在梦游</a></p>#}
+{#                    <p>海外网·11-07 16:52</p>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a class="image_func" href="#"><img src="images/01.jpg" alt=""></a>#}
+{#                    <p><a href="#">美国一男子开6枪致妻子死亡 律师辩称：他当时在梦游</a></p>#}
+{#                    <p>海外网·11-07 16:52</p>#}
+{#                </li>#}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block fantasy %}
+    <div class="rank_con fr"
+         style="border: 1px solid #E6E6FA;margin-top:20px;border-top:3px solid #4d9df1;border-radius: 5px;">
+        <div id="fan_color">
+            <h3 class="header" style="font-size: 17px;margin-top: 10px;margin-left: 20px;">下一篇</h3>
+            {#            <hr style="margin-top: -25px;width: 24px;margin-left: 20px;color: #455a64">#}
+            <HR align=center width=25 color=#ddd SIZE=1 style="margin-top: -25px;margin-left: 20px;">
+            <div style="width: 320px;height: 120px;margin: 0 auto;" class="hr">
+                <a href="{{ next_new.id }}"
+                   style="">{{ next_new.new_title }}</a>
+                <p style="font-size: 13px;color: #787878; margin-top: 20px;">{{ next_new.digest[: 22] }}</p>
+                <p style="font-size: 13px;color: #787878;margin-top: 10px;">{{ next_new.new_time }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block author_card %}
+    {#<div class="author_card">#}
+    {#    <a href="#" class="author_pic"><img src="/static/index/images/user_pic.png" alt="author_pic"></a>#}
+    {#    <a href="#" class="author_name">{{ news_author.nick_name }}</a>#}
+    {#    <div class="author_resume">{{ news_author.signature }}</div>#}
+    {#    <div class="writings"><span>总篇数</span><b>{{ news_author.news_num }}</b></div>#}
+    {#    <div class="follows"><span>粉丝</span><b>{{ news_author.followers_num }}</b></div>#}
+    {#    {% if news_author.can_follow %}#}
+    {#    <a href="javascript:;" class="focus fr" data-user-id="{{ news.user_id }}">关注</a>#}
+    {#    {% else %}#}
+    {#    <a href="javascript:;" class="focused fr" data-user-id="{{ news.user_id }}"><span class="out">已关注</span><span class="over">取消关注</span></a>#}
+    {#    {% endif %}#}
+    {#</div>#}
+{% endblock author_card %}

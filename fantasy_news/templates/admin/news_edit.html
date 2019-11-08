@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新经资讯后台管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/admin/css/main.css">
+	<link rel="stylesheet" href="/static/admin/css/jquery.pagination.css">
+	<script type="text/javascript" src="/static/admin/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/static/admin/js/jquery.pagination.min.js"></script>
+</head>
+<body>
+	<div class="breadcrub">
+			当前位置：新闻管理>新闻版式编辑
+		<form class="news_filter_form">
+			<input type="text" placeholder="请输入关键字" class="input_txt">
+			<input type="submit" value="搜 索" class="input_sub">
+		</form>
+	</div>
+		
+
+	<div class="pannel">			
+			<table class="common_table">
+				<tr>
+					<th width="5%">id</th>
+					<th width="70%">标题</th>
+					<th width="15%">发布时间</th>
+					<th width="10%">管理操作</th>
+				</tr>
+                {% for x in news %}
+				<tr>
+					<td>{{ x.get("id") }}</td>
+					<td class="tleft">{{ x.get("title") }}</td>
+					<td>{{ x.get("create_time") }}</td>
+					<td>
+						<a href="{{ url_for('.news_edit_detail', news_id=x.get("id")) }}" class="edit">编辑</a>
+					</td>
+				</tr>
+                {% endfor %}
+			</table>
+		</div>
+		
+        <div id="pagination" class="page">
+           <div class="ui-pagination-container">
+
+               <a href="{{ url_for('.news_edit') }}?page=1" class="ui-pagination-page-item" >首页</a>
+
+               {% if paginate.has_prev%}
+               <a href="{{ url_for('.news_edit') }}?page={{ paginate.prev_num }}" class="ui-pagination-page-item" >上一页</a>
+               {% endif %}
+               {% for num in paginate.iter_pages() %}
+                   {% if num == paginate.page %}
+                    <a href="#" class="ui-pagination-page-item active" >{{ num }}</a>
+                   {% elif num %}
+                    <a href="{{ url_for('.news_edit') }}?page={{ num }}" class="ui-pagination-page-item" >{{ num }}</a>
+                   {% endif %}
+
+               {% endfor %}
+                {% if paginate.has_next%}
+               <a href="{{ url_for('.news_edit') }}?page={{ paginate.next_num }}" class="ui-pagination-page-item" >下一页</a>
+                {% endif %}
+               <a href="{{ url_for('.news_edit') }}?page={{ paginate.pages }}" class="ui-pagination-page-item" >尾页</a>
+           </div>
+       </div>
+	
+</body>
+</html>

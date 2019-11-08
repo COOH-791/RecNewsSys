@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/index/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/main.css">
+    <script type="text/javascript" src="/static/index/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/index/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+<div class="my_collect">
+    <h3>我的收藏</h3>
+    <ul class="article_list">
+        {% for news in collection_news %}
+            <li><a target="_blank"
+                   href="/detail/{{ news.get("id") }} ">{{ news.get("new_title") }}</a><span>{{ news.get("new_time") }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div id="pagination" class="page">
+        <div class="ui-pagination-container">
+
+            <a href="/user_collection?page=1" class="ui-pagination-page-item">首页</a>
+            {% if paginate.has_previous %}
+                <a href="{{ url_for('.user_collection') }}?page={{ paginate.previous_page_number }}"
+                   class="ui-pagination-page-item">上一页</a>
+            {% endif %}
+            {% for num in paginate.page_range %}
+                {% if num == paginate.number %}
+                    <a href="#" class="ui-pagination-page-item active">{{ num }}</a>
+                {% else %}
+                    <a href="/user_collection/?page={{ num }}"
+                       class="ui-pagination-page-item">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if paginate.has_next %}
+                <a href="/user_collection/?page={{ paginate.next_num }}"
+                   class="ui-pagination-page-item">下一页</a>
+            {% endif %}
+            <a href="/user_collection/?page={{ paginate.num_pages }}" class="ui-pagination-page-item">尾页</a>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

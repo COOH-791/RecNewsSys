@@ -1,0 +1,36 @@
+{% extends 'index/base.html' %}
+
+{% block base_content %}
+    {% block content %}
+    {% endblock content %}
+    <div class="rank_con fr">
+        {% block author_card %}
+        {% endblock author_card %}
+        <div class="rank_title">
+            <h3>点击排行</h3>
+        </div>
+        <ul class="rank_list">
+            {% for news in rank_news %}
+                {% if loop.index == 1 %}
+                    <li><span class="first">{{ loop.index }}</span><a target="view_window"
+                                                                      href="/detail/{{ news.id }}">{{ news.new_title }}</a>
+                    </li>
+                {% elif loop.index == 2 %}
+                    <li><span class="second">{{ loop.index }}</span><a target="view_window"
+                                                                       href="/detail/{{ news.id }}">{{ news.new_title }}</a>
+                    </li>
+                {% elif loop.index == 3 %}
+                    <li><span class="third">{{ loop.index }}</span><a target="view_window"
+                                                                      href="/detail/{{ news.id }}">{{ news.new_title }}</a>
+                    </li>
+                {% else %}
+                    <li><span>{{ loop.index }}</span><a target="view_window"
+                                                        href="/detail/{{ news.id }}">{{ news.new_title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% block fantasy %}
+    {% endblock fantasy %}
+{% endblock base_content %}
+
